@@ -66,7 +66,7 @@ type Store interface {
 	GetProvisionedDataByDashboardID(dashboardID int64) (*models.DashboardProvisioning, error)
 	GetProvisionedDataByDashboardUID(orgID int64, dashboardUID string) (*models.DashboardProvisioning, error)
 	GetPublicDashboardConfig(orgId int64, dashboardUid string) (*models.PublicDashboard, error)
-	GetPublicDashboard(uid string) (*models.PublicDashboard, *models.Dashboard, error)
+	GetPublicDashboard(ctx context.Context, uid string) (*models.PublicDashboard, *models.Dashboard, error)
 	HasAdminPermissionInFolders(ctx context.Context, query *models.HasAdminPermissionInFoldersQuery) error
 	HasEditPermissionInFolders(ctx context.Context, query *models.HasEditPermissionInFoldersQuery) error
 	// SaveAlerts saves dashboard alerts.

@@ -329,10 +329,14 @@ func TestAPIQueryPublicDashboard(t *testing.T) {
 	t.Run("Returns query data when feature toggle is enabled", func(t *testing.T) {
 		server, fakeDashboardService := setup(true)
 
+		fakeDashboardService.On("GetPublicDashboard", mock.Anything, mock.Anything).Return(&models.Dashboard{}, nil)
+		fakeDashboardService.On("GetPublicDashboardConfig", mock.Anything, mock.Anything, mock.Anything).Return(&models.PublicDashboard{}, nil)
+
 		fakeDashboardService.On(
 			"BuildPublicDashboardMetricRequest",
 			mock.Anything,
-			"abc123",
+			mock.Anything,
+			mock.Anything,
 			int64(2),
 		).Return(dtos.MetricRequest{
 			Queries: []*simplejson.Json{
@@ -388,10 +392,13 @@ func TestAPIQueryPublicDashboard(t *testing.T) {
 	t.Run("Status code is 500 when the query fails", func(t *testing.T) {
 		server, fakeDashboardService := setup(true)
 
+		fakeDashboardService.On("GetPublicDashboard", mock.Anything, mock.Anything).Return(&models.Dashboard{}, nil)
+		fakeDashboardService.On("GetPublicDashboardConfig", mock.Anything, mock.Anything, mock.Anything).Return(&models.PublicDashboard{}, nil)
 		fakeDashboardService.On(
 			"BuildPublicDashboardMetricRequest",
 			mock.Anything,
-			"abc123",
+			mock.Anything,
+			mock.Anything,
 			int64(2),
 		).Return(dtos.MetricRequest{
 			Queries: []*simplejson.Json{
@@ -425,10 +432,13 @@ func TestAPIQueryPublicDashboard(t *testing.T) {
 	t.Run("Status code is 200 when a panel has queries from multiple datasources", func(t *testing.T) {
 		server, fakeDashboardService := setup(true)
 
+		fakeDashboardService.On("GetPublicDashboard", mock.Anything, mock.Anything).Return(&models.Dashboard{}, nil)
+		fakeDashboardService.On("GetPublicDashboardConfig", mock.Anything, mock.Anything, mock.Anything).Return(&models.PublicDashboard{}, nil)
 		fakeDashboardService.On(
 			"BuildPublicDashboardMetricRequest",
 			mock.Anything,
-			"abc123",
+			mock.Anything,
+			mock.Anything,
 			int64(2),
 		).Return(dtos.MetricRequest{
 			Queries: []*simplejson.Json{
